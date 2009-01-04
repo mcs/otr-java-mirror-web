@@ -1,5 +1,3 @@
-package layout;
-
 <%@ include file="/taglibs.jsp" %>
 
 <div id="imageHeader">
@@ -16,6 +14,7 @@ package layout;
         </tr>
     </table>
     <div id="navLinks">
-        <s:link href="/example.jsp">Example Link</s:link>
+        <s:link href="/">Index</s:link>
+        <s:link beanclass="otr.mirror.web.action.ShowRecordingsActionBean">Recordings</s:link>
     </div>
 </div>

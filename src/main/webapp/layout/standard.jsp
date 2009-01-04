@@ -1,5 +1,3 @@
-package layout;
-
 <%@ include file="/taglibs.jsp" %>
 
 <s:layout-definition>
@@ -24,7 +22,9 @@ package layout;
                 </div>
 
                 <div id="footer">
-                    Built on <a href="http://www.stripesframework.org">Stripes</a>
+                    <a href="http://otrinfo.de/distro" target="_blank">
+                        powered by Distro @ otr:info
+                    </a>
                 </div>
             </div>
         </body>

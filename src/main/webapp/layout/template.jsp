@@ -1,5 +1,3 @@
-package layout;
-
 <%@ include file="/taglibs.jsp" %>
 
 <s:layout-render name="/layout/standard.jsp" title="CHANGEME">

@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-         version="2.4">
+    <display-name>OTR-Mirror</display-name>
 
-    <description>
-      Stripes Examples
-    </description>
-    <display-name>Stripes Examples</display-name>
-
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!--              Configuration of the Stripes Filter.                   -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <filter>
         <description>
             Provides essential configuration and request processing services
             for the Stripes framework.
         </description>
+
         <display-name>Stripes Filter</display-name>
         <filter-name>StripesFilter</filter-name>
         <filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
@@ -26,19 +16,38 @@
         <!-- REQUIRED init parameter for the Stripes Filter. -->
         <init-param>
             <param-name>ActionResolver.Packages</param-name>
-            <param-value>net.sourceforge.stripes.examples</param-value>
-        </init-param>
-
-        <!-- Optional init parameter for the Stripes Filter. -->
-        <init-param>
-            <param-name>ActionBeanContext.Class</param-name>
-            <param-value>otr.mirror.web.action.OTRMirrorActionBeanContext</param-value>
+            <param-value>otr.mirror.web.action</param-value>
         </init-param>
 
         <init-param>
             <param-name>Stripes.EncryptionKey</param-name>
-            <param-value>TopSecretEncryptionKey! Keep it secret!</param-value>
+            <param-value>dsgewkgfrewr36rgEWRBFXJZGFQ5ZEFW5R34K7HKNXYBZEWGsdfhcer3</param-value>
         </init-param>
+
+        <init-param>
+            <param-name>Extension.Packages</param-name>
+            <param-value>otr.mirror.web.stripesext</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>Interceptor.Classes</param-name>
+            <param-value>
+                net.sourceforge.stripes.integration.spring.SpringInterceptor
+            </param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>LocalePicker.Locales</param-name>
+            <param-value>de,en</param-value>
+        </init-param>
+
+<!--
+        <init-param>
+            <param-name>ExceptionHandler.Class</param-name>
+            <param-value>otr.mirror.web.action.OTRExceptionHandler</param-value>
+        </init-param>
+-->
+
     </filter>
 
     <filter-mapping>
@@ -54,27 +63,52 @@
     </filter-mapping>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!--         Configuration of security filter.                  -->
+    <!--         Configuration of Spring.                                    -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-context.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>StripesResources</param-value>
+    </context-param>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!--         Configuration of the JPA session filter.              -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
     <filter>
-        <description>Provides login security</description>
-        <filter-name>OTRMirrorSecurityFilter</filter-name>
+        <filter-name>hibernateFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>hibernateFilter</filter-name>
+        <url-pattern>*.action</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!--         Configuration of WebPortal security filter.                  -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <filter>
+        <description>Provides login security for WebPortal</description>
+        <filter-name>WebSecurityFilter</filter-name>
         <filter-class>otr.mirror.web.action.SecurityFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>OTRMirrorSecurityFilter</filter-name>
+        <filter-name>WebSecurityFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
-    <!--
-    <filter-mapping>
-        <filter-name>OTRMirrorSecurityFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-    -->
-    
+
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!--         Configuration of the Stripes dispatcher Servlet.            -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

@@ -1,5 +1,6 @@
 package otr.mirror.web.action;
 
+import otr.mirror.web.stripesext.OTRMirrorActionBeanContext;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 
@@ -10,6 +11,7 @@ import net.sourceforge.stripes.action.ActionBeanContext;
  * @author Marcus Krassmann
  */
 public abstract class OTRMirrorActionBean implements ActionBean {
+
     private OTRMirrorActionBeanContext context;
 
     @Override

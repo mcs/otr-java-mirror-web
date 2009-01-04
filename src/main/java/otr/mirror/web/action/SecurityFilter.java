@@ -9,9 +9,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sourceforge.stripes.util.StringUtil;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,16 +22,11 @@ import java.util.Set;
  * @author Tim Fennell
  */
 public class SecurityFilter implements Filter {
-    private static Set<String> publicUrls = new HashSet<String>();
+    private static Set<String> privateUrls = new HashSet<String>();
 
     static {
-        publicUrls.add("/index.jsp");
-        publicUrls.add("/login.jsp");
-        publicUrls.add("/register.jsp");
-        publicUrls.add("/exit.jsp");
-        publicUrls.add("/Login.action");
-        publicUrls.add("/Register.action");
-        publicUrls.add("/ViewResource.action");
+        // add non-public urls to privateUrls here
+        // just for future use, not needed at the moment
     }
 
     /** Does nothing. */
@@ -55,7 +50,8 @@ public class SecurityFilter implements Filter {
         }
         else {
             // Redirect the user to the login page, noting where they were coming from
-            String targetUrl = StringUtil.urlEncode(request.getServletPath());
+            
+            String targetUrl = URLEncoder.encode(request.getServletPath(), "UTF-8");
 
             response.sendRedirect(
                     request.getContextPath() + "/login.jsp?targetUrl=" + targetUrl);
@@ -68,7 +64,7 @@ public class SecurityFilter implements Filter {
     protected boolean isPublicResource(HttpServletRequest request) {
         String resource = request.getServletPath();
 
-        return publicUrls.contains(request.getServletPath())
+        return !privateUrls.contains(request.getServletPath())
                 || (!resource.endsWith(".jsp") && !resource.endsWith(".action"));
     }
 
