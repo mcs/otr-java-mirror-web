@@ -51,12 +51,18 @@ public class DownloadActionBean extends OTRMirrorActionBean {
             long time = file.hashCode() ^ Long.parseLong(key);
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(time);
-            cal.add(Calendar.DAY_OF_MONTH, 1);
             Date now = new Date();
+            if (now.before(cal.getTime())) {
+                // link date is in future => hack attempt...
+                errors.addGlobalError(smplErr);
+            }
+            cal.add(Calendar.DAY_OF_MONTH, 1);
             if (now.after(cal.getTime())) {
+                // 24 hours passed, link became invalid
                 errors.addGlobalError(smplErr);
             }
         } catch (Exception e) {
+            // someone played around with the link => hack attempt...
             errors.addGlobalError(smplErr);
         }
     }
