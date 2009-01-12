@@ -14,7 +14,14 @@
         </tr>
     </table>
     <div id="navLinks">
-        <s:link href="/">Index</s:link>
-        <s:link beanclass="otr.mirror.web.action.ShowRecordingsActionBean">Recordings</s:link>
+        <s:link href="/">
+            <fmt:message key="site.index"/>
+        </s:link>
+        <s:link beanclass="otr.mirror.web.action.ShowRecordingsActionBean">
+            <fmt:message key="site.recordings"/>
+        </s:link>
+        <s:link beanclass="otr.mirror.web.action.ImpressumActionBean">
+            <fmt:message key="site.legal_notice"/>
+        </s:link>
     </div>
 </div>

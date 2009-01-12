@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/otr_mirror"/>
+<Context antiJARLocking="true" path="/otr_mirror">
+    <Resource name="jdbc/otrDS"
+            auth="Container"
+            type="javax.sql.DataSource"
+            maxActive="100"
+            maxIdle="30"
+            maxWait="10000"
+            username="otruser"
+            password="otrpass"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/otr-mirror?autoReconnect=true"/>
+</Context>
