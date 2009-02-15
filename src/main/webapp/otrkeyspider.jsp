@@ -1,0 +1,2 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %><%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><c:forEach var="rec" items="${actionBean.recordings}"><s:link beanclass="otr.mirror.web.action.ShowFileActionBean"><s:param name="recording.filename" value="${rec.filename}"/>${rec.filename}</s:link>
+</c:forEach>

@@ -3,6 +3,22 @@
 
     <display-name>OTR-Mirror</display-name>
 
+    <!--CharsetFilter start-->
+    <filter>
+        <filter-name>Charset Filter</filter-name>
+        <filter-class>otr.mirror.web.filter.CharsetFilter</filter-class>
+        <init-param>
+            <param-name>requestEncoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>Charset Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--CharsetFilter end-->
+
     <filter>
         <description>
             Provides essential configuration and request processing services
@@ -31,9 +47,7 @@
 
         <init-param>
             <param-name>Interceptor.Classes</param-name>
-            <param-value>
-                net.sourceforge.stripes.integration.spring.SpringInterceptor
-            </param-value>
+            <param-value>net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
         </init-param>
 
         <init-param>
@@ -100,7 +114,7 @@
     <filter>
         <description>Provides login security for WebPortal</description>
         <filter-name>WebSecurityFilter</filter-name>
-        <filter-class>otr.mirror.web.action.SecurityFilter</filter-class>
+        <filter-class>otr.mirror.web.filter.SecurityFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -140,5 +154,9 @@
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
+    <welcome-file-list>
+        <welcome-file>welcome.jsp</welcome-file>
+    </welcome-file-list>
 
 </web-app>

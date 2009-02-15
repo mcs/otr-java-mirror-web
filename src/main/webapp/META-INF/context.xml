@@ -6,8 +6,8 @@
             maxActive="100"
             maxIdle="30"
             maxWait="10000"
-            username="otruser"
-            password="otrpass"
+            username="otr"
+            password="otrpw"
             driverClassName="com.mysql.jdbc.Driver"
             url="jdbc:mysql://localhost:3306/otr-mirror?autoReconnect=true"/>
 </Context>

@@ -1,4 +1,4 @@
-package otr.mirror.web.action;
+package otr.mirror.web.filter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -27,6 +27,7 @@ public class SecurityFilter implements Filter {
     static {
         // add non-public urls to privateUrls here
         // just for future use, not needed at the moment
+        privateUrls.add("/admin/");
     }
 
     /** Does nothing. */
@@ -63,9 +64,7 @@ public class SecurityFilter implements Filter {
      */
     protected boolean isPublicResource(HttpServletRequest request) {
         String resource = request.getServletPath();
-
-        return !privateUrls.contains(request.getServletPath())
-                || (!resource.endsWith(".jsp") && !resource.endsWith(".action"));
+        return !resource.contains("/admin/");
     }
 
     /** Does nothing. */

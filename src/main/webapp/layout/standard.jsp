@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ include file="/taglibs.jsp" %>
 
 <s:layout-definition>
@@ -6,7 +7,8 @@
         <head>
             <title>SYN-OTR-Mirror - <fmt:message key="${title}"/></title>
             <link rel="stylesheet" type="text/css" href="${ctx}/otrmirror.css"/>
-            <script type="text/javascript" src="${ctx}/otrmirror.js"></script>
+<!--            <script type="text/javascript" src="${ctx}/otrmirror.js"></script> -->
+            <script type="text/javascript" src="${ctx}/sorttable.js"></script>
             <s:layout-component name="html-head"/>
         </head>
         <body>
@@ -22,9 +24,12 @@
                 </div>
 
                 <div id="footer">
+                    <!--
                     <a href="http://otrinfo.de/distro" target="_blank">
                         powered by Distro @ otr:info
                     </a>
+                    | -->
+                    <a href="http://www.otrkey.com">www.otrkey.com</a>
                 </div>
             </div>
         </body>

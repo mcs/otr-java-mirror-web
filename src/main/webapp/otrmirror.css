@@ -77,6 +77,24 @@ body {
     padding: 4px;
 }
 
+#HQ {
+    border: solid black thin;
+    background-color: #FF3300;
+    color: white;
+}
+
+#DIVX {
+    border: solid black thin;
+    background-color: #3399FF;
+    color: white;
+}
+
+#MP4 {
+    border: solid black thin;
+    background-color: #009999;
+    color: white;
+}
+
 /** Default styles for link elements. */
 a {
     color: green;
@@ -176,4 +194,12 @@ input.error, textarea.error, select.error {
 label.error {
     color: #b72222;
     border-bottom: 1px dashed #b72222;
+}
+
+/* Sortable tables */
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
 }
